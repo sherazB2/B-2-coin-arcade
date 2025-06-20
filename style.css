@@ -1,0 +1,123 @@
+<!-- index.html -->
+... (same content as before)
+</body>
+</html>
+
+<!-- tap-tap.html -->
+... (tap-tap content as added earlier) ...
+
+<!-- bot-battle.html -->
+... (bot-battle content as added earlier) ...
+
+<!-- astro-flip.html -->
+... (astro-flip content as added earlier) ...
+
+<!-- style.css -->
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #1e1e2f, #3f3f66);
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+  margin: 0;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+h1, h2 {
+  color: #ffd700;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #00ffff;
+  font-weight: bold;
+  display: inline-block;
+  padding: 10px;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  margin: 10px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #00c6ff;
+  color: white;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.tap-coin {
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, gold, orange);
+  border-radius: 50%;
+  border: 3px solid #fff176;
+  font-size: 2rem;
+  margin: 20px auto;
+  display: block;
+}
+
+.tap-coin.pop {
+  animation: pop .2s ease-in-out;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.coin-display {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.chat-box {
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  height: 100px;
+  overflow-y: scroll;
+  border: 1px solid #555;
+  margin: 10px auto;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 80%;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.spin-button {
+  background: conic-gradient(#ffe600, #ff9500, #ffe600);
+  color: black;
+  font-weight: bold;
+  box-shadow: 0 0 10px gold;
+}
+
+.audio-control {
+  display: none;
+}
