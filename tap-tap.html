@@ -1,0 +1,162 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>B-2 Coin Arcade</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 Welcome to B-2 Coin Arcade</h1>
+
+    <div class="coin-display">
+      <p>Credits: <span id="liveCredits">0</span></p>
+      <p>B-2 Coins: <span id="liveCoins">0</span></p>
+    </div>
+
+    <h2>🎮 Play Games</h2>
+    <ul>
+      <li><a href="tap-tap.html">🔱 Tap Tap Miner</a></li>
+      <li><a href="bot-battle.html">🤖 Bot Battle</a></li>
+      <li><a href="astro-flip.html">�� Astro Flip</a></li>
+    </ul>
+
+    <h2>🎁 Daily Login Reward</h2>
+    <button onclick="claimLogin()">Claim 250 Credits</button>
+
+    <h2>🍡 Spin to Win</h2>
+    <button class="spin-button" onclick="spinWheel()">🌀 Spin</button>
+
+    <h2>🎯 Redeem Center</h2>
+    <p>10,000 Credits = 1 B-2 Coin</p>
+    <button onclick="redeem()">Redeem Now</button>
+
+    <h2>👥 Refer & Earn</h2>
+    <p>Share your referral code: <strong id="refCodeDisplay"></strong></p>
+    <button onclick="copyRef()">Copy Code</button>
+    <p>You get +1000 credits per friend!</p>
+
+    <h2>📲 Follow Us</h2>
+    <button onclick="follow('TikTok')">Follow on TikTok (+1000)</button>
+    <button onclick="follow('Instagram')">Follow on Instagram (+1000)</button>
+    <button onclick="follow('X')">Follow on X (+1000)</button>
+
+    <h2>💬 Public Chat</h2>
+    <div class="chat-box" id="chatBox">
+      <p><strong>Player1:</strong> Just hit 10,000 credits! 🔥</p>
+    </div>
+    <input type="text" id="chatInput" placeholder="Type your message..." />
+    <button onclick="sendChat()">Send</button>
+  </div>
+
+  <audio id="clickSound" class="audio-control" src="click.mp3" preload="auto"></audio>
+
+  <script>
+    let credits = parseInt(localStorage.getItem("credits") || "0");
+    let coins = parseInt(localStorage.getItem("coins") || "0");
+    let refCode = localStorage.getItem("refCode") || "B2-" + Math.floor(Math.random()*100000);
+
+    document.getElementById("liveCredits").textContent = credits;
+    document.getElementById("liveCoins").textContent = coins;
+    document.getElementById("refCodeDisplay").textContent = refCode;
+    localStorage.setItem("refCode", refCode);
+
+    function update() {
+      document.getElementById("liveCredits").textContent = credits;
+      document.getElementById("liveCoins").textContent = coins;
+      localStorage.setItem("credits", credits);
+      localStorage.setItem("coins", coins);
+    }
+
+    function claimLogin() {
+      credits += 250;
+      update();
+      playSound();
+    }
+
+    function spinWheel() {
+      let reward = Math.floor(Math.random()*10 + 1) * 100;
+      alert("You won " + reward + " credits!");
+      credits += reward;
+      update();
+      playSound();
+    }
+
+    function redeem() {
+      if (credits >= 10000) {
+        credits -= 10000;
+        coins += 1;
+        alert("You redeemed 1 B-2 Coin!");
+        update();
+      } else {
+        alert("You need 10,000 credits to redeem!");
+      }
+    }
+
+    function copyRef() {
+      navigator.clipboard.writeText(refCode);
+      alert("Referral code copied!");
+    }
+
+    function follow(platform) {
+      credits += 1000;
+      update();
+      alert("Thanks for following on " + platform + "!");
+    }
+
+    function sendChat() {
+      let msg = document.getElementById("chatInput").value;
+      if (msg.trim()) {
+        let chat = document.getElementById("chatBox");
+        chat.innerHTML += `<p><strong>You:</strong> ${msg}</p>`;
+        document.getElementById("chatInput").value = "";
+        chat.scrollTop = chat.scrollHeight;
+      }
+    }
+
+    function playSound() {
+      document.getElementById("clickSound").play();
+    }
+  </script>
+</body>
+</html>
+
+<!-- tap-tap.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tap Tap Miner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🔱 Tap Tap Miner</h1>
+    <p>Tap the golden coin to earn +1 credit!</p>
+    <button id="tapBtn" class="tap-coin"></button>
+    <p>Credits Mined: <span id="coinCount">0</span></p>
+    <a href="index.html">⬅️ Back to Game Hub</a>
+  </div>
+  <audio id="tapSound" src="click.mp3" preload="auto"></audio>
+  <script>
+    let credits = parseInt(localStorage.getItem("credits") || "0");
+    const display = document.getElementById("coinCount");
+    const tapBtn = document.getElementById("tapBtn");
+    const sound = document.getElementById("tapSound");
+
+    display.textContent = credits;
+
+    tapBtn.addEventListener("click", () => {
+      credits += 1;
+      display.textContent = credits;
+      localStorage.setItem("credits", credits);
+      tapBtn.classList.add("pop");
+      sound.play();
+      setTimeout(() => tapBtn.classList.remove("pop"), 150);
+    });
+  </script>
+</body>
+</html>
