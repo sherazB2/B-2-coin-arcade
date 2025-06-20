@@ -1,0 +1,52 @@
+<!-- index.html -->
+... (same content as before)
+</body>
+</html>
+
+<!-- tap-tap.html -->
+... (tap-tap content as added earlier) ...
+
+<!-- bot-battle.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bot Battle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 Bot Battle</h1>
+    <p>Pick the winning bot to earn +3 credits!</p>
+    <div style="display: flex; justify-content: space-around;">
+      <button onclick="battle(0)">🤖 Bot A</button>
+      <button onclick="battle(1)">🤖 Bot B</button>
+      <button onclick="battle(2)">🤖 Bot C</button>
+    </div>
+    <p id="result" style="margin-top: 20px;"></p>
+    <p>Total Credits: <span id="credits">0</span></p>
+    <a href="index.html">⬅️ Back to Game Hub</a>
+  </div>
+  <audio id="battleSound" src="click.mp3" preload="auto"></audio>
+  <script>
+    let credits = parseInt(localStorage.getItem("credits") || "0");
+    document.getElementById("credits").textContent = credits;
+    const sound = document.getElementById("battleSound");
+
+    function battle(choice) {
+      const win = Math.floor(Math.random() * 3);
+      const result = document.getElementById("result");
+      if (choice === win) {
+        credits += 3;
+        result.innerHTML = "🎉 You won! +3 credits";
+      } else {
+        result.innerHTML = "❌ You lost. Try again!";
+      }
+      localStorage.setItem("credits", credits);
+      document.getElementById("credits").textContent = credits;
+      sound.play();
+    }
+  </script>
+</body>
+</html>
