@@ -1,0 +1,52 @@
+<!-- index.html -->
+... (same content as before)
+</body>
+</html>
+
+<!-- tap-tap.html -->
+... (tap-tap content as added earlier) ...
+
+<!-- bot-battle.html -->
+... (bot-battle content as added earlier) ...
+
+<!-- astro-flip.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Astro Flip</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>�� Astro Flip</h1>
+    <p>Match the stars and win +5 credits!</p>
+    <button id="flipBtn" style="font-size:1.4rem; background: linear-gradient(to right, #00c6ff, #0072ff); color:white; padding:20px; border-radius:20px;">✨ Flip</button>
+    <p id="flipResult"></p>
+    <p>Total Credits: <span id="astroCredits">0</span></p>
+    <a href="index.html">⬅️ Back to Game Hub</a>
+  </div>
+  <audio id="flipSound" src="click.mp3" preload="auto"></audio>
+  <script>
+    let credits = parseInt(localStorage.getItem("credits") || "0");
+    document.getElementById("astroCredits").textContent = credits;
+    const flipBtn = document.getElementById("flipBtn");
+    const result = document.getElementById("flipResult");
+    const sound = document.getElementById("flipSound");
+
+    flipBtn.addEventListener("click", () => {
+      const match = Math.random() < 0.5;
+      if (match) {
+        credits += 5;
+        result.innerHTML = "🌟 It's a match! +5 credits";
+      } else {
+        result.innerHTML = "💫 Not a match. Try again!";
+      }
+      localStorage.setItem("credits", credits);
+      document.getElementById("astroCredits").textContent = credits;
+      sound.play();
+    });
+  </script>
+</body>
+</html>
